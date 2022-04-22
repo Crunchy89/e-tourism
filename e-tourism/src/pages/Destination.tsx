@@ -82,6 +82,7 @@ const Destination = ({navigation}) => {
                                 />
                                 )}
                                 keyExtractor={(item) => item.id.toString()}
+                                showsHorizontalScrollIndicator={false}
                                 />
                     <Header title="New Destination"/>
                     <FlatList
@@ -97,6 +98,7 @@ const Destination = ({navigation}) => {
                                 />
                                 )}
                                 keyExtractor={(item) => item.id.toString()}
+                                showsHorizontalScrollIndicator={false}
                                 />
                     </View>
                     <Header title="Find More"/>
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     view:{
         flexDirection:'row',
         flexWrap:'wrap',
-        justifyContent:'space-between',
+        justifyContent:'space-around',
         marginBottom:20
     }
 });
