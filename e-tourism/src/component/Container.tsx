@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
         borderRadius:5,
         margin:10,
         flex:3,
-        justifyContent:"center",
-        alignItems:"center",
         overflow:"hidden",
         padding: 5,
     },

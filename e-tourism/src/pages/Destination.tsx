@@ -8,8 +8,8 @@ const Destination = ({navigation}) => {
         <>
         <ButtonBack link="Home" navigation={navigation} title="Destination"/>
         <Container>
-            <View>
                 <Text>Destination</Text>
+            <View>
             </View>
         </Container>
         </>

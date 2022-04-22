@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image,Text,TouchableOpacity,Button} from 'react-native';
+import {Image,Text,TouchableOpacity} from 'react-native';
 import {StyleSheet} from 'react-native';
 
 const ButtonIcon = (props:any) => {
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     button:{
         flexDirection:"column",
         alignItems:"center",
-        width:80,
-        height:80,
+        width:70,
+        height:90,
     },
     text:{
         textAlign:"justify"
