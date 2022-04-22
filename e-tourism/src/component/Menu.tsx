@@ -12,15 +12,14 @@ const Menu  = (props) => {
                 numColumns={4}
                 keyExtractor={(_, index) => index.toString()}
                 data={menu} 
-                renderItem={({item}) => {
-                    return (
+                renderItem={({item}) =>  (
                         <ButtonIcon
                         title={item.title}
                         image={item.image}
                         link={item.link}
                         navigation={props.navigation}/>
-                    );
-                }}
+                    )
+                }
                 columnWrapperStyle={styles.flat}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}

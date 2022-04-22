@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         margin:10,
         flex:3,
         overflow:"hidden",
-        padding: 5,
+        padding: 10,
     },
   });
 

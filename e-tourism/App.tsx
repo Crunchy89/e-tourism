@@ -22,6 +22,7 @@ import Rest from "./src/pages/Rest"
 import Police from "./src/pages/Police"
 import Event from "./src/pages/Event"
 import Help from "./src/pages/Help"
+import DetailDestination from './src/pages/DetailDestination';
 
 import { NavigationContainer,DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -63,6 +64,7 @@ const App = () => {
             <Stack.Screen  name="Police" component={Police} options={{headerShown: false}}  />
             <Stack.Screen  name="Event" component={Event} options={{headerShown: false}}  />
             <Stack.Screen  name="Help" component={Help} options={{headerShown: false}}  />
+            <Stack.Screen  name="DetailDestination" component={DetailDestination} options={{headerShown: false}}  />
           </Stack.Navigator>
         </NavigationContainer>
       </ImageBackground>
