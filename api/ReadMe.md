@@ -1,9 +1,7 @@
-# booth-api
+# api-etourism
 
-build image with
+run 
+    `git mod vendor`
 
-`docker build --tag booth-api:1.0 .`
-
-create container with
-
-`docker run -d -p 3001:80 --env-file .env -v ~/docker-volume/pronto-api/temp:/app/temp --name booth-api booth-api:1.0`
+then
+    `go run main.go`
