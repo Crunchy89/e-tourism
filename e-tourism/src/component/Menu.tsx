@@ -20,7 +20,7 @@ const Menu  = (props) => {
                         navigation={props.navigation}/>
                     )
                 }
-                columnWrapperStyle={styles.flat}
+                // columnWrapperStyle={styles.flat}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             />
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     flat:{
         flexWrap:"wrap",
-        justifyContent:"space-around",
+        justifyContent:"flex-start",
     }
   });
 

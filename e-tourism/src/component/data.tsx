@@ -36,59 +36,29 @@ const data = [
     link:"Destination"
     },
     {
-    title:"Market",
-    image: b,
-    link:"Market"
-    },
-    {
     title:"Hotel",
     image: c,
     link:"Hotel"
     },
     {
-    title:"Flight plan",
-    image: d,
-    link:"Flight"
-    },
+      title:"Home Stay",
+      image: c,
+      link:"Hotel"
+      },
     {
-    title:"Local Product",
-    image: e,
-    link:"Local"
-    },
-    {
-    title:"Rental",
+    title:"Travel",
     image: f,
     link:"Rental"
     },
     {
-    title:"Food",
+    title:"Resto",
     image: g,
     link:"Food"
-    },
-    {
-    title:"Hospital",
-    image: h,
-    link:"Hospital"
-    },
-    {
-    title:"Rest Area",
-    image: i,
-    link:"Rest"
-    },
-    {
-    title:"Police Station", 
-    image: j,
-    link:"Police"
     },
     {
     title:"Event",
     image: k,
     link:"Event"
-    },
-    {
-    title:"Help",
-    image: l,
-    link:"Help"
     },
     
 ]
