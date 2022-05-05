@@ -24,24 +24,27 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	// Setup the Database
 	databaseName := os.Getenv("DATABASE_NAME")
 	if databaseName == "" {
 		databaseName = "etourism"
 	}
 
-	// Setup the Repository
 	mongoAuthSource := os.Getenv("DB_AUTH_SOURCE")
 	if mongoAuthSource == "" {
 		mongoAuthSource = "localhost:27017"
 	}
+
 	userName := os.Getenv("DB_USER_NAME")
 	if userName == "" {
-		userName = "etourism"
+		userName = "admin"
 	}
+
 	passWord := os.Getenv("DB_PASSWORD")
 	if passWord == "" {
-		passWord = "development"
+		passWord = "makannasi"
 	}
+
 	uri := fmt.Sprintf("mongodb://%s:%s@%s/%s", userName, passWord, mongoAuthSource, databaseName)
 	mongoDBInstance, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
 	if err != nil {
@@ -56,7 +59,6 @@ func main() {
 	// Setup the usecase
 	userUseCase := &_userUseCase.UserUseCase{
 		User: userRepo,
-		// Client:        mongoClient,
 	}
 
 	// Setup the handler
@@ -73,10 +75,9 @@ func main() {
 	}))
 	v1 := r.Group("api").Group("v1")
 	user := v1.Group("user")
-	user.GET("username", userHandler.FetchUserByUsername)
-	user.GET("token", userHandler.FetchUserByToken)
-	user.GET("id", userHandler.FetchUserById)
 	user.POST("", userHandler.AddUser)
+	user.GET("username", userHandler.FetchUserByUsername)
+	user.GET("id", userHandler.FetchUserById)
 
 	r.GET("", func(c *gin.Context) {
 		c.String(http.StatusOK, "Welcome to API e-tourism Lombok Tengah")

@@ -22,6 +22,7 @@ func TestUserUseCase(t *testing.T) {
 		resultUser := &domain.User{
 			ID:       id,
 			Username: "test",
+			Email:    "test@test.com",
 			Password: "test",
 			// Token:    "test",
 		}
@@ -36,6 +37,7 @@ func TestUserUseCase(t *testing.T) {
 		resultUser := &domain.User{
 			ID:       id,
 			Username: "test",
+			Email:    "test@test.com",
 			Password: "test",
 			// Token:    "test",
 		}
@@ -49,6 +51,7 @@ func TestUserUseCase(t *testing.T) {
 		resultUser := &domain.User{
 			ID:       primitive.NewObjectID(),
 			Username: "test",
+			Email:    "test@test.com",
 			Password: "test",
 			// Token:    "test",
 		}
@@ -62,6 +65,7 @@ func TestUserUseCase(t *testing.T) {
 		resultUser := &domain.User{
 			ID:       primitive.NewObjectID(),
 			Username: "test",
+			Email:    "test@test.com",
 			Password: "test",
 			// Token:    "test",
 		}
