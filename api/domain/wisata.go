@@ -30,4 +30,5 @@ type WisataRepository interface {
 	UpdateByID(ctx context.Context, ID primitive.ObjectID, d *Wisata) r.Ex
 	DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex
 	Active(ctx context.Context, ID primitive.ObjectID) r.Ex
+	FetchBySlug(ctx context.Context, slug string) (*Wisata, r.Ex)
 }

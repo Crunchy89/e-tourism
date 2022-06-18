@@ -34,6 +34,13 @@ func (p *TravelUseCase) GetTravelByID(ID primitive.ObjectID) (*domain.Travel, r.
 	return p.Travel.FetchByID(ctx, ID)
 }
 
+// function to get Travel by slug
+func (p *TravelUseCase) GetTravelBySlug(slug string) (*domain.Travel, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Travel.FetchBySlug(ctx, slug)
+}
+
 // function update by id
 func (p *TravelUseCase) UpdateTravelByID(ID primitive.ObjectID, domain *domain.Travel) r.Ex {
 	ctx, cancel := context.WithCancel(context.Background())

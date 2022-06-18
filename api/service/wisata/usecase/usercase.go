@@ -34,6 +34,13 @@ func (p *WisataUseCase) GetWisataByID(ID primitive.ObjectID) (*domain.Wisata, r.
 	return p.Wisata.FetchByID(ctx, ID)
 }
 
+// function to get data by slug
+func (p *WisataUseCase) GetWisataBySlug(slug string) (*domain.Wisata, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Wisata.FetchBySlug(ctx, slug)
+}
+
 // function update by id
 func (p *WisataUseCase) UpdateWisataByID(ID primitive.ObjectID, domain *domain.Wisata) r.Ex {
 	ctx, cancel := context.WithCancel(context.Background())

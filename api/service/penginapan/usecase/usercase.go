@@ -34,6 +34,13 @@ func (p *PenginapanUseCase) GetPenginapanByID(ID primitive.ObjectID) (*domain.Pe
 	return p.Penginapan.FetchByID(ctx, ID)
 }
 
+// function to get data by slug
+func (p *PenginapanUseCase) GetPenginapanBySlug(slug string) (*domain.Penginapan, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Penginapan.FetchBySlug(ctx, slug)
+}
+
 // function update by id
 func (p *PenginapanUseCase) UpdatePenginapanByID(ID primitive.ObjectID, domain *domain.Penginapan) r.Ex {
 	ctx, cancel := context.WithCancel(context.Background())

@@ -8,7 +8,7 @@ ENV CWD=/app
 ENV DB_AUTH_SOURCE=etourism
 ENV DB_USER_NAME=root
 ENV DB_PASSWORD=password
-ENV SECRET=secretJwtUbersnap001
+ENV SECRET=secretJwtEtourism001
 
 RUN apk add git
 
