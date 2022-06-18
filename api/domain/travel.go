@@ -6,6 +6,7 @@ type Travel struct {
 	ID          primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	NamaTravel  string             `json:"nama_travel" bson:"nama_travel,omitempty"`
 	Pemilik     string             `json:"pemilik" bson:"pemilik,omitempty"`
+	Slug        string             `json:"slug" bson:"slug,omitempty"`
 	Alamat      string             `json:"alamat" bson:"alamat,omitempty"`
 	NoHp        string             `json:"no_hp" bson:"no_hp,omitempty"`
 	Email       string             `json:"email" bson:"email,omitempty"`

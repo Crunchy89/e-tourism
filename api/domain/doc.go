@@ -31,7 +31,6 @@ type JenisAktifitas struct {
 type Tags struct {
 	Tags string `json:"tags" bson:"tags,omitempty"`
 }
-
 type MediaSosial struct {
 	Facebook  string `json:"facebook" bson:"facebook,omitempty"`
 	Instagram string `json:"instagram" bson:"instagram,omitempty"`

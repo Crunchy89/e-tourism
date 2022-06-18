@@ -5,6 +5,7 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 type Wisata struct {
 	ID              primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	NamaObjekWisata string             `json:"nama_objek_wisata" bson:"nama_objek_wisata,omitempty"`
+	Slug            string             `json:"slug" bson:"slug,omitempty"`
 	PotensiWisata   string             `json:"potensi_wisata" bson:"potensi_wisata,omitempty"`
 	JenisDayaTarik  []*JenisWisata     `json:"jenis_daya_tarik" bson:"jenis_daya_tarik,omitempty"`
 	JenisAktifitas  []*JenisAktifitas  `json:"jenis_aktifitas" bson:"jenis_aktifitas,omitempty"`
