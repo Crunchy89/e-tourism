@@ -17,8 +17,6 @@ type Penginapan struct {
 	Jenis       string             `json:"jenis" bson:"jenis,omitempty"`
 	TotalKamar  uint16             `json:"total_kamar" bson:"total_kamar,omitempty"`
 	MediaSosial *MediaSosial       `json:"media_sosial" bson:"media_sosial,omitempty"`
-	Photo       []*Photo           `json:"photo" bson:"photo,omitempty"`
-	Thumbnails  []*Thumbnails      `json:"thumbnails" bson:"thumbnails,omitempty"`
 	Koordinat   *Koordinat         `json:"koordinat" bson:"koordinat,omitempty"`
 	IsDelete    bool               `json:"is_delete" bson:"is_delete"`
 	IsActive    bool               `json:"is_active" bson:"is_active"`
@@ -28,5 +26,8 @@ type Penginapan struct {
 type PenginapanRepository interface {
 	Add(ctx context.Context, d *Penginapan) (primitive.ObjectID, r.Ex)
 	FetchAll(ctx context.Context) ([]*Penginapan, r.Ex)
-	Fetch(ctx context.Context, ID primitive.ObjectID) (*Penginapan, r.Ex)
+	FetchByID(ctx context.Context, ID primitive.ObjectID) (*Penginapan, r.Ex)
+	UpdateByID(ctx context.Context, ID primitive.ObjectID, d *Penginapan) r.Ex
+	DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex
+	Active(ctx context.Context, ID primitive.ObjectID) r.Ex
 }

@@ -40,7 +40,7 @@ func TestUserUseCase(t *testing.T) {
 			Email:    "test@test.com",
 			Password: "test",
 		}
-		user.On("Fetch", mock.Anything, id).Return(resultUser, nil)
+		user.On("FetchByID", mock.Anything, id).Return(resultUser, nil)
 		user, err := userUseCase.GetUserByID(id)
 		assert.NoError(t, err)
 		assert.Equal(t, resultUser, user)

@@ -18,6 +18,22 @@ type UserRepository struct {
 	mock.Mock
 }
 
+// ActiveByID provides a mock function with given fields: ctx, ID
+func (_m *UserRepository) ActiveByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	ret := _m.Called(ctx, ID)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) r.Ex); ok {
+		r0 = rf(ctx, ID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
+}
+
 // Add provides a mock function with given fields: ctx, d
 func (_m *UserRepository) Add(ctx context.Context, d *domain.User) (primitive.ObjectID, r.Ex) {
 	ret := _m.Called(ctx, d)
@@ -43,29 +59,20 @@ func (_m *UserRepository) Add(ctx context.Context, d *domain.User) (primitive.Ob
 	return r0, r1
 }
 
-// Fetch provides a mock function with given fields: ctx, ID
-func (_m *UserRepository) Fetch(ctx context.Context, ID primitive.ObjectID) (*domain.User, r.Ex) {
+// DeleteByID provides a mock function with given fields: ctx, ID
+func (_m *UserRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
 	ret := _m.Called(ctx, ID)
 
-	var r0 *domain.User
-	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) *domain.User); ok {
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) r.Ex); ok {
 		r0 = rf(ctx, ID)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*domain.User)
+			r0 = ret.Get(0).(r.Ex)
 		}
 	}
 
-	var r1 r.Ex
-	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
-		r1 = rf(ctx, ID)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).(r.Ex)
-		}
-	}
-
-	return r0, r1
+	return r0
 }
 
 // FetchAll provides a mock function with given fields: ctx
@@ -84,6 +91,56 @@ func (_m *UserRepository) FetchAll(ctx context.Context) ([]*domain.User, r.Ex) {
 	var r1 r.Ex
 	if rf, ok := ret.Get(1).(func(context.Context) r.Ex); ok {
 		r1 = rf(ctx)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// FetchByEmail provides a mock function with given fields: ctx, email
+func (_m *UserRepository) FetchByEmail(ctx context.Context, email string) (*domain.User, r.Ex) {
+	ret := _m.Called(ctx, email)
+
+	var r0 *domain.User
+	if rf, ok := ret.Get(0).(func(context.Context, string) *domain.User); ok {
+		r0 = rf(ctx, email)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*domain.User)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, string) r.Ex); ok {
+		r1 = rf(ctx, email)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// FetchByID provides a mock function with given fields: ctx, ID
+func (_m *UserRepository) FetchByID(ctx context.Context, ID primitive.ObjectID) (*domain.User, r.Ex) {
+	ret := _m.Called(ctx, ID)
+
+	var r0 *domain.User
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) *domain.User); ok {
+		r0 = rf(ctx, ID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*domain.User)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
+		r1 = rf(ctx, ID)
 	} else {
 		if ret.Get(1) != nil {
 			r1 = ret.Get(1).(r.Ex)
@@ -116,6 +173,54 @@ func (_m *UserRepository) FetchByUsername(ctx context.Context, username string) 
 	}
 
 	return r0, r1
+}
+
+// UpdateByEmail provides a mock function with given fields: ctx, email, d
+func (_m *UserRepository) UpdateByEmail(ctx context.Context, email string, d *domain.User) r.Ex {
+	ret := _m.Called(ctx, email, d)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, string, *domain.User) r.Ex); ok {
+		r0 = rf(ctx, email, d)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
+}
+
+// UpdateByID provides a mock function with given fields: ctx, ID, d
+func (_m *UserRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.User) r.Ex {
+	ret := _m.Called(ctx, ID, d)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID, *domain.User) r.Ex); ok {
+		r0 = rf(ctx, ID, d)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
+}
+
+// UpdateByUsername provides a mock function with given fields: ctx, username, d
+func (_m *UserRepository) UpdateByUsername(ctx context.Context, username string, d *domain.User) r.Ex {
+	ret := _m.Called(ctx, username, d)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, string, *domain.User) r.Ex); ok {
+		r0 = rf(ctx, username, d)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
 }
 
 type NewUserRepositoryT interface {

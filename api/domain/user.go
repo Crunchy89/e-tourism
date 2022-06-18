@@ -21,6 +21,12 @@ type User struct {
 type UserRepository interface {
 	Add(ctx context.Context, d *User) (primitive.ObjectID, r.Ex)
 	FetchAll(ctx context.Context) ([]*User, r.Ex)
-	Fetch(ctx context.Context, ID primitive.ObjectID) (*User, r.Ex)
+	FetchByID(ctx context.Context, ID primitive.ObjectID) (*User, r.Ex)
 	FetchByUsername(ctx context.Context, username string) (*User, r.Ex)
+	FetchByEmail(ctx context.Context, email string) (*User, r.Ex)
+	UpdateByID(ctx context.Context, ID primitive.ObjectID, d *User) r.Ex
+	UpdateByUsername(ctx context.Context, username string, d *User) r.Ex
+	UpdateByEmail(ctx context.Context, email string, d *User) r.Ex
+	DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex
+	ActiveByID(ctx context.Context, ID primitive.ObjectID) r.Ex
 }

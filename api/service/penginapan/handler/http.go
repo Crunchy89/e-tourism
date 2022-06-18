@@ -46,3 +46,9 @@ func (h *PenginapanHandler) FetchPenginapanById(c *gin.Context) {
 	res, err := h.Penginapan.GetPenginapanByID(ID)
 	s.Auto(c, res, err)
 }
+
+// fetch all
+func (h *PenginapanHandler) FetchPenginapan(c *gin.Context) {
+	res, err := h.Penginapan.FetchAllPenginapan()
+	s.Auto(c, res, err)
+}

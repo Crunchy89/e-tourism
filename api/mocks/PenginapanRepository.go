@@ -18,6 +18,22 @@ type PenginapanRepository struct {
 	mock.Mock
 }
 
+// Active provides a mock function with given fields: ctx, ID
+func (_m *PenginapanRepository) Active(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	ret := _m.Called(ctx, ID)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) r.Ex); ok {
+		r0 = rf(ctx, ID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
+}
+
 // Add provides a mock function with given fields: ctx, d
 func (_m *PenginapanRepository) Add(ctx context.Context, d *domain.Penginapan) (primitive.ObjectID, r.Ex) {
 	ret := _m.Called(ctx, d)
@@ -43,29 +59,20 @@ func (_m *PenginapanRepository) Add(ctx context.Context, d *domain.Penginapan) (
 	return r0, r1
 }
 
-// Fetch provides a mock function with given fields: ctx, ID
-func (_m *PenginapanRepository) Fetch(ctx context.Context, ID primitive.ObjectID) (*domain.Penginapan, r.Ex) {
+// DeleteByID provides a mock function with given fields: ctx, ID
+func (_m *PenginapanRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
 	ret := _m.Called(ctx, ID)
 
-	var r0 *domain.Penginapan
-	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) *domain.Penginapan); ok {
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) r.Ex); ok {
 		r0 = rf(ctx, ID)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*domain.Penginapan)
+			r0 = ret.Get(0).(r.Ex)
 		}
 	}
 
-	var r1 r.Ex
-	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
-		r1 = rf(ctx, ID)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).(r.Ex)
-		}
-	}
-
-	return r0, r1
+	return r0
 }
 
 // FetchAll provides a mock function with given fields: ctx
@@ -91,6 +98,47 @@ func (_m *PenginapanRepository) FetchAll(ctx context.Context) ([]*domain.Pengina
 	}
 
 	return r0, r1
+}
+
+// FetchByID provides a mock function with given fields: ctx, ID
+func (_m *PenginapanRepository) FetchByID(ctx context.Context, ID primitive.ObjectID) (*domain.Penginapan, r.Ex) {
+	ret := _m.Called(ctx, ID)
+
+	var r0 *domain.Penginapan
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) *domain.Penginapan); ok {
+		r0 = rf(ctx, ID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*domain.Penginapan)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
+		r1 = rf(ctx, ID)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// UpdateByID provides a mock function with given fields: ctx, ID, d
+func (_m *PenginapanRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.Penginapan) r.Ex {
+	ret := _m.Called(ctx, ID, d)
+
+	var r0 r.Ex
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID, *domain.Penginapan) r.Ex); ok {
+		r0 = rf(ctx, ID, d)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(r.Ex)
+		}
+	}
+
+	return r0
 }
 
 type NewPenginapanRepositoryT interface {

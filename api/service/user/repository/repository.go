@@ -85,18 +85,52 @@ func (p *userRepository) find(ctx context.Context, d interface{}, opts ...*optio
 	return p.consumeCursor(ctx, cur)
 }
 
+// func add data
 func (p *userRepository) Add(ctx context.Context, d *domain.User) (primitive.ObjectID, r.Ex) {
 	return p.insert(ctx, d)
 }
 
+// func fetch all
 func (p *userRepository) FetchAll(ctx context.Context) ([]*domain.User, r.Ex) {
-	return p.find(ctx, bson.M{})
+	return p.find(ctx, bson.M{"is_delete": false, "is_active": true})
 }
 
-func (p *userRepository) Fetch(ctx context.Context, ID primitive.ObjectID) (*domain.User, r.Ex) {
-	return p.findOne(ctx, bson.M{"_id": ID})
+// func fetch by id
+func (p *userRepository) FetchByID(ctx context.Context, ID primitive.ObjectID) (*domain.User, r.Ex) {
+	return p.findOne(ctx, bson.M{"_id": ID, "is_delete": false, "is_active": true})
 }
 
+// fetch by username
 func (p *userRepository) FetchByUsername(ctx context.Context, username string) (*domain.User, r.Ex) {
 	return p.findOne(ctx, bson.M{"username": username})
+}
+
+// fetch by email
+func (p *userRepository) FetchByEmail(ctx context.Context, email string) (*domain.User, r.Ex) {
+	return p.findOne(ctx, bson.M{"email": email, "is_delete": false, "is_active": true})
+}
+
+// func update by id
+func (p *userRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.User) r.Ex {
+	return p.updatedOne(ctx, bson.M{"_id": ID}, d)
+}
+
+// func update by username
+func (p *userRepository) UpdateByUsername(ctx context.Context, username string, d *domain.User) r.Ex {
+	return p.updatedOne(ctx, bson.M{"username": username}, d)
+}
+
+// func update by email
+func (p *userRepository) UpdateByEmail(ctx context.Context, email string, d *domain.User) r.Ex {
+	return p.updatedOne(ctx, bson.M{"email": email}, d)
+}
+
+// function delete set status is_delete to true
+func (p *userRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	return p.updatedOne(ctx, bson.M{"_id": ID}, bson.M{"$set": bson.M{"is_delete": true}})
+}
+
+// function Active set status is_active to true
+func (p *userRepository) ActiveByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	return p.updatedOne(ctx, bson.M{"_id": ID}, bson.M{"$set": bson.M{"is_active": true}})
 }

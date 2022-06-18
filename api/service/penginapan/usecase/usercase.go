@@ -20,9 +20,37 @@ func (p *PenginapanUseCase) AddPenginapan(domain *domain.Penginapan) (primitive.
 	return p.Penginapan.Add(ctx, domain)
 }
 
+// fetch all
+func (p *PenginapanUseCase) FetchAllPenginapan() ([]*domain.Penginapan, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Penginapan.FetchAll(ctx)
+}
+
 // function to get user by id
 func (p *PenginapanUseCase) GetPenginapanByID(ID primitive.ObjectID) (*domain.Penginapan, r.Ex) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	return p.Penginapan.Fetch(ctx, ID)
+	return p.Penginapan.FetchByID(ctx, ID)
+}
+
+// function update by id
+func (p *PenginapanUseCase) UpdatePenginapanByID(ID primitive.ObjectID, domain *domain.Penginapan) r.Ex {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Penginapan.UpdateByID(ctx, ID, domain)
+}
+
+// fucntion delete
+func (p *PenginapanUseCase) DeletePenginapanByID(ID primitive.ObjectID) r.Ex {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Penginapan.DeleteByID(ctx, ID)
+}
+
+// function activate
+func (p *PenginapanUseCase) ActivatePenginapanByID(ID primitive.ObjectID) r.Ex {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Penginapan.Active(ctx, ID)
 }

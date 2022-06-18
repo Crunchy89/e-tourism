@@ -131,8 +131,7 @@ func (p *penginapanRepository) FetchAll(ctx context.Context) ([]*domain.Penginap
 }
 
 // func fetch by id
-func (p *penginapanRepository) Fetch(ctx context.Context, ID primitive.ObjectID) (*domain.Penginapan, r.Ex) {
-	// make variable filter to get data where is delete not equal true or is_delete null
+func (p *penginapanRepository) FetchByID(ctx context.Context, ID primitive.ObjectID) (*domain.Penginapan, r.Ex) {
 	filter := bson.M{"_id": ID, "is_deleted": false}
 	return p.findOne(ctx, filter)
 }
@@ -140,4 +139,22 @@ func (p *penginapanRepository) Fetch(ctx context.Context, ID primitive.ObjectID)
 // func fetch by slug
 func (p *penginapanRepository) FetchBySlug(ctx context.Context, slug string) (*domain.Penginapan, r.Ex) {
 	return p.findOne(ctx, bson.M{"slug": slug, "is_deleted": false})
+}
+
+// funct update
+func (p *penginapanRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.Penginapan) r.Ex {
+	filter := bson.M{"_id": ID}
+	return p.updatedOne(ctx, filter, d)
+}
+
+// funct delete
+func (p *penginapanRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	filter := bson.M{"_id": ID}
+	return p.updatedOne(ctx, filter, bson.M{"is_deleted": true})
+}
+
+// func active
+func (p *penginapanRepository) Active(ctx context.Context, ID primitive.ObjectID) r.Ex {
+	filter := bson.M{"_id": ID}
+	return p.updatedOne(ctx, filter, bson.M{"is_active": true})
 }

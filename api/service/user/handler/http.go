@@ -63,3 +63,15 @@ func (h *UserHandler) FetchUserByUsername(c *gin.Context) {
 	res, err := h.User.GetUserByUsername(username)
 	s.Auto(c, res, err)
 }
+
+// fetch user by email
+func (h *UserHandler) FetchUserByEmail(c *gin.Context) {
+	// get value email from form file
+	email := c.GetHeader("email")
+	if email == "" {
+		s.AbortWithMessage(c, "email is required")
+		return
+	}
+	res, err := h.User.GetUserByEmail(email)
+	s.Auto(c, res, err)
+}
