@@ -6,6 +6,7 @@ mobile/node_modules
 /node_modules
 /.pnp
 .pnp.js
+database/database
 
 # testing
 /coverage

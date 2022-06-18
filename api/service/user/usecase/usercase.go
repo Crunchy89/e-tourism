@@ -5,6 +5,7 @@ import (
 
 	"api/domain"
 	"api/utils/r"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -31,11 +32,4 @@ func (p *UserUseCase) GetUserByUsername(username string) (*domain.User, r.Ex) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	return p.User.FetchByUsername(ctx, username)
-}
-
-// function get user by token
-func (p *UserUseCase) GetUserByToken(token string) (*domain.User, r.Ex) {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-	return p.User.FetchByToken(ctx, token)
 }

@@ -5,6 +5,7 @@ import (
 	"api/service/user/usecase"
 	_hash "api/utils/password"
 	"api/utils/s"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -27,7 +28,15 @@ func (h *UserHandler) AddUser(c *gin.Context) {
 		return
 	}
 	body.Password = hashPassword
+	body.Log = &domain.Log{
+		Created: primitive.NewDateTimeFromTime(time.Now()),
+		Updated: primitive.NewDateTimeFromTime(time.Now()),
+	}
 	res, err := h.User.AddUser(body)
+	if err != nil {
+		s.AbortWithMessage(c, "User already exists")
+		return
+	}
 	s.Auto(c, res, err)
 }
 
@@ -46,23 +55,11 @@ func (h *UserHandler) FetchUserById(c *gin.Context) {
 // fetch user by username
 func (h *UserHandler) FetchUserByUsername(c *gin.Context) {
 	// get value username from form file
-	username := c.Request.FormValue("username")
+	username := c.GetHeader("username")
 	if username == "" {
 		s.AbortWithMessage(c, "username is required")
 		return
 	}
 	res, err := h.User.GetUserByUsername(username)
-	s.Auto(c, res, err)
-}
-
-// fetch user by token
-func (h *UserHandler) FetchUserByToken(c *gin.Context) {
-	// get value token from form file
-	token := c.GetHeader("token")
-	if token == "" {
-		s.AbortWithMessage(c, "token is required")
-		return
-	}
-	res, err := h.User.GetUserByToken(token)
 	s.Auto(c, res, err)
 }

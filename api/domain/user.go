@@ -13,7 +13,9 @@ type User struct {
 	Username string             `json:"username" bson:"username,omitempty"`
 	Email    string             `json:"email" bson:"email,omitempty"`
 	Password string             `json:"password" bson:"password,omitempty"`
-	// Token    string             `json:"token" bson:"token,omitempty"`
+	IsDelete bool               `json:"is_delete" bson:"is_delete"`
+	ISActive bool               `json:"is_active" bson:"is_active"`
+	Log      *Log               `json:"log" bson:"log,omitempty"`
 }
 
 type UserRepository interface {
@@ -21,5 +23,4 @@ type UserRepository interface {
 	FetchAll(ctx context.Context) ([]*User, r.Ex)
 	Fetch(ctx context.Context, ID primitive.ObjectID) (*User, r.Ex)
 	FetchByUsername(ctx context.Context, username string) (*User, r.Ex)
-	FetchByToken(ctx context.Context, token string) (*User, r.Ex)
 }

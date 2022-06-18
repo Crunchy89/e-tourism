@@ -5,6 +5,7 @@ import (
 
 	"api/domain"
 	"api/utils/r"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -58,7 +59,6 @@ func (p *userRepository) updatedOne(ctx context.Context, f interface{}, u interf
 	if _, err := p.coll.UpdateOne(ctx, f, u, opts...); err != nil {
 		return r.NewErrorMongo(p.coll.Name(), err)
 	}
-
 	return nil
 }
 
@@ -99,8 +99,4 @@ func (p *userRepository) Fetch(ctx context.Context, ID primitive.ObjectID) (*dom
 
 func (p *userRepository) FetchByUsername(ctx context.Context, username string) (*domain.User, r.Ex) {
 	return p.findOne(ctx, bson.M{"username": username})
-}
-
-func (p *userRepository) FetchByToken(ctx context.Context, token string) (*domain.User, r.Ex) {
-	return p.findOne(ctx, bson.M{"token": token})
 }
