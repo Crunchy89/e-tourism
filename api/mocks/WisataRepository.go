@@ -125,6 +125,31 @@ func (_m *WisataRepository) FetchByID(ctx context.Context, ID primitive.ObjectID
 	return r0, r1
 }
 
+// FetchBySlug provides a mock function with given fields: ctx, slug
+func (_m *WisataRepository) FetchBySlug(ctx context.Context, slug string) (*domain.Wisata, r.Ex) {
+	ret := _m.Called(ctx, slug)
+
+	var r0 *domain.Wisata
+	if rf, ok := ret.Get(0).(func(context.Context, string) *domain.Wisata); ok {
+		r0 = rf(ctx, slug)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*domain.Wisata)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, string) r.Ex); ok {
+		r1 = rf(ctx, slug)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
 // UpdateByID provides a mock function with given fields: ctx, ID, d
 func (_m *WisataRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.Wisata) r.Ex {
 	ret := _m.Called(ctx, ID, d)

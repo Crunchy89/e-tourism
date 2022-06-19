@@ -125,6 +125,31 @@ func (_m *PenginapanRepository) FetchByID(ctx context.Context, ID primitive.Obje
 	return r0, r1
 }
 
+// FetchBySlug provides a mock function with given fields: ctx, slug
+func (_m *PenginapanRepository) FetchBySlug(ctx context.Context, slug string) (*domain.Penginapan, r.Ex) {
+	ret := _m.Called(ctx, slug)
+
+	var r0 *domain.Penginapan
+	if rf, ok := ret.Get(0).(func(context.Context, string) *domain.Penginapan); ok {
+		r0 = rf(ctx, slug)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*domain.Penginapan)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, string) r.Ex); ok {
+		r1 = rf(ctx, slug)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
 // UpdateByID provides a mock function with given fields: ctx, ID, d
 func (_m *PenginapanRepository) UpdateByID(ctx context.Context, ID primitive.ObjectID, d *domain.Penginapan) r.Ex {
 	ret := _m.Called(ctx, ID, d)
