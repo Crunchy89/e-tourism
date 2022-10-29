@@ -8,14 +8,13 @@ import (
 )
 
 type Review struct {
-	ID           primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	ForeignID    primitive.ObjectID `json:"foreign_id" bson:"foreign_id,omitempty"`
-	UserID       primitive.ObjectID `json:"user_id" bson:"user_id,omitempty"`
-	Username     string             `json:"username" bson:"username,omitempty"`
-	TotalComment int                `json:"total_comment" bson:"total_comment,omitempty"`
-	IsDelete     bool               `json:"is_delete" bson:"is_delete"`
-	Comment      string             `json:"comment" bson:"comment,omitempty"`
-	Log          *Log               `json:"log" bson:"log,omitempty"`
+	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	ForeignID primitive.ObjectID `json:"foreign_id" bson:"foreign_id,omitempty"`
+	UserID    primitive.ObjectID `json:"user_id" bson:"user_id,omitempty"`
+	Username  string             `json:"username" bson:"username,omitempty"`
+	IsDelete  bool               `json:"is_delete" bson:"is_delete"`
+	Comment   string             `json:"comment" bson:"comment,omitempty"`
+	Log       *Log               `json:"log" bson:"log,omitempty"`
 }
 
 type ReviewRepository interface {

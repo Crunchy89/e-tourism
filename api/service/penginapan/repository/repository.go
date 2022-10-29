@@ -158,3 +158,32 @@ func (p *penginapanRepository) Active(ctx context.Context, ID primitive.ObjectID
 	filter := bson.M{"_id": ID}
 	return p.updatedOne(ctx, filter, bson.M{"is_active": true})
 }
+
+// function pagination
+func (p *penginapanRepository) Pagination(ctx context.Context, page int64, limit int64) ([]*domain.Penginapan, r.Ex) {
+	skip := (page - 1) * limit
+	return p.find(ctx, bson.M{"is_delete": false}, &options.FindOptions{
+		Sort:  bson.M{"created_at": -1},
+		Skip:  &skip,
+		Limit: &limit,
+	})
+}
+
+// fucnction search with pagination
+func (p *penginapanRepository) Search(ctx context.Context, page int64, limit int64, search string) ([]*domain.Penginapan, r.Ex) {
+	skip := (page - 1) * limit
+	return p.find(ctx, bson.M{"is_delete": false, "$or": bson.A{bson.M{"penginapanname": bson.M{"$regex": search}}, bson.M{"email": bson.M{"$regex": search}}}}, &options.FindOptions{
+		Sort:  bson.M{"created_at": -1},
+		Skip:  &skip,
+		Limit: &limit,
+	})
+}
+
+// function count all where is_delete is false
+func (p *penginapanRepository) CountAll(ctx context.Context) (int64, r.Ex) {
+	count, err := p.coll.CountDocuments(ctx, bson.M{"is_delete": false})
+	if err != nil {
+		return 0, r.NewErrorMongo(p.coll.Name(), err)
+	}
+	return count, nil
+}

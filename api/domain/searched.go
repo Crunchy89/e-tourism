@@ -8,11 +8,12 @@ import (
 )
 
 type Searched struct {
-	ID       primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Search   string             `json:"search" bson:"search"`
-	UserID   primitive.ObjectID `json:"user_id" bson:"user_id,omitempty"`
-	IsDelete bool               `json:"is_delete" bson:"is_delete"`
-	Log      *Log               `json:"log" bson:"log,omitempty"`
+	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	UserID    primitive.ObjectID `json:"user_id" bson:"user_id,omitempty"`
+	ForeignID primitive.ObjectID `json:"foreign_id" bson:"foreign_id,omitempty"`
+	Search    string             `json:"search" bson:"search"`
+	IsDelete  bool               `json:"is_delete" bson:"is_delete"`
+	Log       *Log               `json:"log" bson:"log,omitempty"`
 }
 
 type SearchedRepository interface {

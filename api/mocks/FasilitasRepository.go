@@ -100,6 +100,31 @@ func (_m *FasilitasRepository) FetchAll(ctx context.Context) ([]*domain.Fasilita
 	return r0, r1
 }
 
+// FetchByForeignID provides a mock function with given fields: ctx, foreignID
+func (_m *FasilitasRepository) FetchByForeignID(ctx context.Context, foreignID primitive.ObjectID) ([]*domain.Fasilitas, r.Ex) {
+	ret := _m.Called(ctx, foreignID)
+
+	var r0 []*domain.Fasilitas
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID) []*domain.Fasilitas); ok {
+		r0 = rf(ctx, foreignID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*domain.Fasilitas)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
+		r1 = rf(ctx, foreignID)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
 // FetchByID provides a mock function with given fields: ctx, ID
 func (_m *FasilitasRepository) FetchByID(ctx context.Context, ID primitive.ObjectID) (*domain.Fasilitas, r.Ex) {
 	ret := _m.Called(ctx, ID)
@@ -116,6 +141,56 @@ func (_m *FasilitasRepository) FetchByID(ctx context.Context, ID primitive.Objec
 	var r1 r.Ex
 	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID) r.Ex); ok {
 		r1 = rf(ctx, ID)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// PaginationByForeignID provides a mock function with given fields: ctx, foreignID, page, limit
+func (_m *FasilitasRepository) PaginationByForeignID(ctx context.Context, foreignID primitive.ObjectID, page int64, limit int64) ([]*domain.Fasilitas, r.Ex) {
+	ret := _m.Called(ctx, foreignID, page, limit)
+
+	var r0 []*domain.Fasilitas
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID, int64, int64) []*domain.Fasilitas); ok {
+		r0 = rf(ctx, foreignID, page, limit)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*domain.Fasilitas)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID, int64, int64) r.Ex); ok {
+		r1 = rf(ctx, foreignID, page, limit)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// SearchByForeignID provides a mock function with given fields: ctx, foreignID, page, limit, keyword
+func (_m *FasilitasRepository) SearchByForeignID(ctx context.Context, foreignID primitive.ObjectID, page int64, limit int64, keyword string) ([]*domain.Fasilitas, r.Ex) {
+	ret := _m.Called(ctx, foreignID, page, limit, keyword)
+
+	var r0 []*domain.Fasilitas
+	if rf, ok := ret.Get(0).(func(context.Context, primitive.ObjectID, int64, int64, string) []*domain.Fasilitas); ok {
+		r0 = rf(ctx, foreignID, page, limit, keyword)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*domain.Fasilitas)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, primitive.ObjectID, int64, int64, string) r.Ex); ok {
+		r1 = rf(ctx, foreignID, page, limit, keyword)
 	} else {
 		if ret.Get(1) != nil {
 			r1 = ret.Get(1).(r.Ex)

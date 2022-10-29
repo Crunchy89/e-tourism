@@ -59,6 +59,29 @@ func (_m *PenginapanRepository) Add(ctx context.Context, d *domain.Penginapan) (
 	return r0, r1
 }
 
+// CountAll provides a mock function with given fields: ctx
+func (_m *PenginapanRepository) CountAll(ctx context.Context) (int64, r.Ex) {
+	ret := _m.Called(ctx)
+
+	var r0 int64
+	if rf, ok := ret.Get(0).(func(context.Context) int64); ok {
+		r0 = rf(ctx)
+	} else {
+		r0 = ret.Get(0).(int64)
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context) r.Ex); ok {
+		r1 = rf(ctx)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
 // DeleteByID provides a mock function with given fields: ctx, ID
 func (_m *PenginapanRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
 	ret := _m.Called(ctx, ID)
@@ -141,6 +164,56 @@ func (_m *PenginapanRepository) FetchBySlug(ctx context.Context, slug string) (*
 	var r1 r.Ex
 	if rf, ok := ret.Get(1).(func(context.Context, string) r.Ex); ok {
 		r1 = rf(ctx, slug)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// Pagination provides a mock function with given fields: ctx, page, limit
+func (_m *PenginapanRepository) Pagination(ctx context.Context, page int64, limit int64) ([]*domain.Penginapan, r.Ex) {
+	ret := _m.Called(ctx, page, limit)
+
+	var r0 []*domain.Penginapan
+	if rf, ok := ret.Get(0).(func(context.Context, int64, int64) []*domain.Penginapan); ok {
+		r0 = rf(ctx, page, limit)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*domain.Penginapan)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, int64, int64) r.Ex); ok {
+		r1 = rf(ctx, page, limit)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(r.Ex)
+		}
+	}
+
+	return r0, r1
+}
+
+// Search provides a mock function with given fields: ctx, page, limit, search
+func (_m *PenginapanRepository) Search(ctx context.Context, page int64, limit int64, search string) ([]*domain.Penginapan, r.Ex) {
+	ret := _m.Called(ctx, page, limit, search)
+
+	var r0 []*domain.Penginapan
+	if rf, ok := ret.Get(0).(func(context.Context, int64, int64, string) []*domain.Penginapan); ok {
+		r0 = rf(ctx, page, limit, search)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*domain.Penginapan)
+		}
+	}
+
+	var r1 r.Ex
+	if rf, ok := ret.Get(1).(func(context.Context, int64, int64, string) r.Ex); ok {
+		r1 = rf(ctx, page, limit, search)
 	} else {
 		if ret.Get(1) != nil {
 			r1 = ret.Get(1).(r.Ex)

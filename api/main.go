@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"os"
 
+	_fasilitasHandler "api/service/fasilitas/handler"
+	_fasilitasRepo "api/service/fasilitas/repository"
+	_fasilitasUseCase "api/service/fasilitas/usecase"
 	_penginapanHandler "api/service/penginapan/handler"
 	_penginapanRepo "api/service/penginapan/repository"
 	_penginapanUseCase "api/service/penginapan/usecase"
@@ -58,6 +61,7 @@ func main() {
 	// setup the repository
 	userRepo := _userRepo.NewUserRepository(database)
 	penginapanRepo := _penginapanRepo.NewPenginapanRepository(database)
+	fasilitasRepo := _fasilitasRepo.NewFasilitasRepository(database)
 
 	// Setup the usecase
 	userUseCase := &_userUseCase.UserUseCase{
@@ -68,6 +72,10 @@ func main() {
 		Penginapan: penginapanRepo,
 	}
 
+	fasilitasUseCase := &_fasilitasUseCase.FasilitasUseCase{
+		Fasilitas: fasilitasRepo,
+	}
+
 	// Setup the handler
 	userHandler := &_userHandler.UserHandler{
 		User: userUseCase,
@@ -75,6 +83,10 @@ func main() {
 
 	penginapanHandler := &_penginapanHandler.PenginapanHandler{
 		Penginapan: penginapanUseCase,
+	}
+
+	fasilitasHandler := &_fasilitasHandler.FasilitasHandler{
+		Fasilitas: fasilitasUseCase,
 	}
 
 	r := gin.Default()
@@ -87,14 +99,34 @@ func main() {
 
 	v1 := r.Group("api").Group("v1")
 
-	user := v1.Group("user")
-	user.POST("", userHandler.AddUser)
-	user.GET("username", userHandler.FetchUserByUsername)
-	user.GET("id", userHandler.FetchUserById)
+	fasilitas := v1.Group("fasilitas")
+	fasilitas.POST("", fasilitasHandler.AddFasilitas)
+	fasilitas.GET("", fasilitasHandler.FetchFasilitas)
+	fasilitas.PUT("", fasilitasHandler.UpdateFasilitas)
+	fasilitas.DELETE("", fasilitasHandler.DeleteFasilitas)
+	fasilitas.GET("single", fasilitasHandler.FetchFasilitasById)
+	fasilitas.GET("foreignid", fasilitasHandler.FetchFasilitasByForeignID)
 
 	penginapan := v1.Group("penginapan")
 	penginapan.POST("", penginapanHandler.AddPenginapan)
-	penginapan.GET("", penginapanHandler.FetchPenginapanById)
+	penginapan.GET("", penginapanHandler.FetchPenginapan)
+	penginapan.PUT("", penginapanHandler.UpdatePenginapanByID)
+	penginapan.DELETE("", penginapanHandler.DeletePenginapanByID)
+	penginapan.GET("single", penginapanHandler.FetchPenginapanById)
+	penginapan.GET("slug", penginapanHandler.FetchPenginapanBySlug)
+	penginapan.GET("pagination", penginapanHandler.FetchPagination)
+	penginapan.GET("search", penginapanHandler.FetchSearchPagination)
+
+	user := v1.Group("user")
+	user.POST("", userHandler.AddUser)
+	user.GET("", userHandler.FetchAllUser)
+	user.PUT("", userHandler.UpdateUserById)
+	user.DELETE("", userHandler.DeleteUserById)
+	user.GET("single", userHandler.FetchUserById)
+	user.GET("username", userHandler.FetchUserByUsername)
+	user.GET("email", userHandler.FetchUserByEmail)
+	user.GET("pagination", userHandler.FetchPagination)
+	user.GET("search", userHandler.FetchSearchPagination)
 
 	r.GET("", func(c *gin.Context) {
 		c.String(http.StatusOK, "Welcome to API e-tourism Lombok Tengah")

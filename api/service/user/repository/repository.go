@@ -134,3 +134,32 @@ func (p *userRepository) DeleteByID(ctx context.Context, ID primitive.ObjectID) 
 func (p *userRepository) ActiveByID(ctx context.Context, ID primitive.ObjectID) r.Ex {
 	return p.updatedOne(ctx, bson.M{"_id": ID}, bson.M{"$set": bson.M{"is_active": true}})
 }
+
+// function pagination
+func (p *userRepository) Pagination(ctx context.Context, page int64, limit int64) ([]*domain.User, r.Ex) {
+	skip := (page - 1) * limit
+	return p.find(ctx, bson.M{"is_delete": false}, &options.FindOptions{
+		Sort:  bson.M{"created_at": -1},
+		Skip:  &skip,
+		Limit: &limit,
+	})
+}
+
+// fucnction search with pagination
+func (p *userRepository) Search(ctx context.Context, page int64, limit int64, search string) ([]*domain.User, r.Ex) {
+	skip := (page - 1) * limit
+	return p.find(ctx, bson.M{"is_delete": false, "$or": bson.A{bson.M{"username": bson.M{"$regex": search}}, bson.M{"email": bson.M{"$regex": search}}}}, &options.FindOptions{
+		Sort:  bson.M{"created_at": -1},
+		Skip:  &skip,
+		Limit: &limit,
+	})
+}
+
+// function count all where is_delete is false
+func (p *userRepository) CountAll(ctx context.Context) (int64, r.Ex) {
+	count, err := p.coll.CountDocuments(ctx, bson.M{"is_delete": false})
+	if err != nil {
+		return 0, r.NewErrorMongo(p.coll.Name(), err)
+	}
+	return count, nil
+}

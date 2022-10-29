@@ -18,6 +18,7 @@ type Wisata struct {
 	Koordinat       *Koordinat         `json:"koordinat" bson:"koordinat,omitempty"`
 	MediaSosial     *MediaSosial       `json:"media_sosial" bson:"media_sosial,omitempty"`
 	Tags            []*string          `json:"tags" bson:"tags,omitempty"`
+	Rating          float32            `json:"rating" bson:"rating,omitempty"`
 	IsDelete        bool               `json:"is_delete" bson:"is_delete"`
 	IsActive        bool               `json:"is_active" bson:"is_active"`
 	Log             *Log               `json:"log" bson:"log,omitempty"`

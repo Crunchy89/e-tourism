@@ -34,6 +34,13 @@ func (p *FasilitasUseCase) GetFasilitasByID(ID primitive.ObjectID) (*domain.Fasi
 	return p.Fasilitas.FetchByID(ctx, ID)
 }
 
+// function to get fasilitas by foreign id
+func (p *FasilitasUseCase) GetFasilitasByForeignID(foreignID primitive.ObjectID) ([]*domain.Fasilitas, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Fasilitas.FetchByForeignID(ctx, foreignID)
+}
+
 // function update by id
 func (p *FasilitasUseCase) UpdateFasilitasByID(ID primitive.ObjectID, domain *domain.Fasilitas) r.Ex {
 	ctx, cancel := context.WithCancel(context.Background())
@@ -53,4 +60,18 @@ func (p *FasilitasUseCase) ActivateFasilitasByID(ID primitive.ObjectID) r.Ex {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	return p.Fasilitas.Active(ctx, ID)
+}
+
+// function to get fasilitas by foreign id pagination
+func (p *FasilitasUseCase) GetFasilitasByForeignIDPagination(foreignID primitive.ObjectID, page int64, limit int64) ([]*domain.Fasilitas, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Fasilitas.PaginationByForeignID(ctx, foreignID, page, limit)
+}
+
+// function to get fasilitas search pagination by foreign id
+func (p *FasilitasUseCase) GetFasilitasSearchByForeignIDPagination(foreignID primitive.ObjectID, page int64, limit int64, keyword string) ([]*domain.Fasilitas, r.Ex) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	return p.Fasilitas.SearchByForeignID(ctx, foreignID, page, limit, keyword)
 }

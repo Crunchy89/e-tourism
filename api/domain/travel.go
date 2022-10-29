@@ -17,6 +17,7 @@ type Travel struct {
 	Email       string             `json:"email" bson:"email,omitempty"`
 	Koordinat   *Koordinat         `json:"koordinat" bson:"koordinat,omitempty"`
 	MediaSosial *MediaSosial       `json:"media_sosial" bson:"media_sosial,omitempty"`
+	Rating      float32            `json:"rating" bson:"rating,omitempty"`
 	IsDelete    bool               `json:"is_delete" bson:"is_delete"`
 	IsActive    bool               `json:"is_active" bson:"is_active"`
 	Log         *Log               `json:"log" bson:"log,omitempty"`

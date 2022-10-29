@@ -18,6 +18,13 @@ type User struct {
 	Log      *Log               `json:"log" bson:"log,omitempty"`
 }
 
+type UserPagination struct {
+	Data  []*User `json:"data"`
+	Page  int64   `json:"page"`
+	Limit int64   `json:"limit"`
+	Total int64   `json:"total"`
+}
+
 type UserRepository interface {
 	Add(ctx context.Context, d *User) (primitive.ObjectID, r.Ex)
 	FetchAll(ctx context.Context) ([]*User, r.Ex)
@@ -29,4 +36,7 @@ type UserRepository interface {
 	UpdateByEmail(ctx context.Context, email string, d *User) r.Ex
 	DeleteByID(ctx context.Context, ID primitive.ObjectID) r.Ex
 	ActiveByID(ctx context.Context, ID primitive.ObjectID) r.Ex
+	Pagination(ctx context.Context, page int64, limit int64) ([]*User, r.Ex)
+	Search(ctx context.Context, page int64, limit int64, search string) ([]*User, r.Ex)
+	CountAll(ctx context.Context) (int64, r.Ex)
 }

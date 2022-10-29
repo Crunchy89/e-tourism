@@ -153,3 +153,29 @@ func (p *fasilitasRepository) Active(ctx context.Context, ID primitive.ObjectID)
 	filter := bson.M{"_id": ID}
 	return p.updatedOne(ctx, filter, bson.M{"is_active": true})
 }
+
+// funct fetch by foreign id and is_deleted = false
+func (p *fasilitasRepository) FetchByForeignID(ctx context.Context, foreignID primitive.ObjectID) ([]*domain.Fasilitas, r.Ex) {
+	filter := bson.M{"foreign_id": foreignID, "is_deleted": false}
+	return p.find(ctx, filter)
+}
+
+// function pagination by foreign id and is_deleted = false
+func (p *fasilitasRepository) PaginationByForeignID(ctx context.Context, foreignID primitive.ObjectID, page int64, limit int64) ([]*domain.Fasilitas, r.Ex) {
+	filter := bson.M{"foreign_id": foreignID, "is_deleted": false}
+	opts := []*options.FindOptions{
+		options.Find().SetSort(bson.M{"created_at": -1}),
+		options.Find().SetLimit(limit),
+	}
+	return p.find(ctx, filter, opts...)
+}
+
+// function search by foreign id and is_deleted = false with pagination
+func (p *fasilitasRepository) SearchByForeignID(ctx context.Context, foreignID primitive.ObjectID, page int64, limit int64, keyword string) ([]*domain.Fasilitas, r.Ex) {
+	filter := bson.M{"foreign_id": foreignID, "is_deleted": false, "nama_fasilitas": primitive.Regex{Pattern: keyword, Options: "i"}}
+	opts := []*options.FindOptions{
+		options.Find().SetSort(bson.M{"created_at": -1}),
+		options.Find().SetLimit(limit),
+	}
+	return p.find(ctx, filter, opts...)
+}
