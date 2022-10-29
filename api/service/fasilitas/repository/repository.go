@@ -100,8 +100,8 @@ func (p *fasilitasRepository) UpdateMany(ctx context.Context, f interface{}, u i
 // func find data to update
 func (p *fasilitasRepository) findForUpdate(ctx context.Context, f interface{}, opts ...*options.FindOneAndUpdateOptions) (*domain.Fasilitas, r.Ex) {
 	updated := bson.D{
-		{"$set", bson.D{
-			{"_lock_tx", primitive.NewObjectID()},
+		{Key: "$set", Value: bson.D{
+			{Key: "_lock_tx", Value: primitive.NewObjectID()},
 		}},
 	}
 	res := new(domain.Fasilitas)
@@ -165,6 +165,7 @@ func (p *fasilitasRepository) PaginationByForeignID(ctx context.Context, foreign
 	filter := bson.M{"foreign_id": foreignID, "is_deleted": false}
 	opts := []*options.FindOptions{
 		options.Find().SetSort(bson.M{"created_at": -1}),
+		options.Find().SetSkip(limit * page),
 		options.Find().SetLimit(limit),
 	}
 	return p.find(ctx, filter, opts...)

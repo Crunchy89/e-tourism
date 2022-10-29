@@ -100,8 +100,8 @@ func (p *visitedRepository) UpdateMany(ctx context.Context, f interface{}, u int
 // func find data to update
 func (p *visitedRepository) findForUpdate(ctx context.Context, f interface{}, opts ...*options.FindOneAndUpdateOptions) (*domain.Visited, r.Ex) {
 	updated := bson.D{
-		{"$set", bson.D{
-			{"_lock_tx", primitive.NewObjectID()},
+		{Key: "$set", Value: bson.D{
+			{Key: "_lock_tx", Value: primitive.NewObjectID()},
 		}},
 	}
 	res := new(domain.Visited)

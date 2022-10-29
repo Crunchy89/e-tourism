@@ -100,8 +100,8 @@ func (p *penginapanRepository) UpdateMany(ctx context.Context, f interface{}, u 
 // func find data to update
 func (p *penginapanRepository) findForUpdate(ctx context.Context, f interface{}, opts ...*options.FindOneAndUpdateOptions) (*domain.Penginapan, r.Ex) {
 	updated := bson.D{
-		{"$set", bson.D{
-			{"_lock_tx", primitive.NewObjectID()},
+		{Key: "$set", Value: bson.D{
+			{Key: "_lock_tx", Value: primitive.NewObjectID()},
 		}},
 	}
 	res := new(domain.Penginapan)

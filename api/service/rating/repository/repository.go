@@ -100,8 +100,8 @@ func (p *ratingRepository) UpdateMany(ctx context.Context, f interface{}, u inte
 // func find data to update
 func (p *ratingRepository) findForUpdate(ctx context.Context, f interface{}, opts ...*options.FindOneAndUpdateOptions) (*domain.Rating, r.Ex) {
 	updated := bson.D{
-		{"$set", bson.D{
-			{"_lock_tx", primitive.NewObjectID()},
+		{Key: "$set", Value: bson.D{
+			{Key: "_lock_tx", Value: primitive.NewObjectID()},
 		}},
 	}
 	res := new(domain.Rating)
